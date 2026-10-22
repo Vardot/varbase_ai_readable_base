@@ -1,10 +1,9 @@
 [![Varbase](https://raw.githubusercontent.com/Vardot/varbase/11.0.x/images/varbase-logo.png)](https://www.drupal.org/project/varbase)
 
 # Varbase AI Readable Base
-[![CI](https://github.com/Vardot/varbase_ai_readable_base/actions/workflows/ci.yml/badge.svg?branch=1.0.x)](https://github.com/Vardot/varbase_ai_readable_base/actions/workflows/ci.yml)
-[![Varbase AI Readable Base](https://img.shields.io/badge/Varbase%20AI%20Readable%20Base-1.0.x--dev-0d6efc?labelColor=001d38&style=flat-square)](https://github.com/Vardot/varbase_ai_readable_base/tree/1.0.x)
+[![Varbase AI Readable Base](https://img.shields.io/badge/Varbase%20AI%20Readable%20Base-1.0.x--dev-0d6efc?labelColor=001d38&style=flat-square)](https://www.drupal.org/project/varbase_ai_readable_base)
 
-A private Drupal recipe that makes a Varbase 11 site readable by AI tools. It serves
+A Drupal recipe that makes a Varbase 11 site readable by AI tools. It serves
 [`/llms.txt`](https://llmstxt.org), built from the site name, slogan, main menu and footer menu, and a Markdown
 version of every content item and taxonomy term, at `<path>.md` or for a request sent with `Accept: text/markdown`.
 The HTML pages are unchanged.
@@ -51,11 +50,9 @@ What a site answers once the recipe is applied and the `settings.php` line is in
 ## Install and apply
 
 ```bash
-# 1. Fetch the recipe. The repository is private, so Composer clones it over SSH.
-ddev auth ssh
-ddev composer config repositories.varbase_ai_readable_base vcs git@github.com:Vardot/varbase_ai_readable_base.git
-ddev composer config --json extra.drupal-recipe-unpack.ignore '["vardot/varbase_ai_readable_base"]'
-ddev composer require vardot/varbase_ai_readable_base:1.0.x-dev --prefer-source
+# 1. Fetch the recipe.
+ddev composer config --json extra.drupal-recipe-unpack.ignore '["drupal/varbase_ai_readable_base"]'
+ddev composer require drupal/varbase_ai_readable_base:1.0.x-dev
 
 # 2. Rebuild caches first, so Drupal sees the modules Composer just added.
 ddev drush cr
@@ -102,23 +99,13 @@ only picks up the changed `settings.php` after PHP restarts, which a deploy does
 
 ## Automated testing
 
-`.github/workflows/ci.yml` runs on every pull request, every push to `1.0.x` and every tag:
+GitLab CI on [git.drupalcode.org](https://git.drupalcode.org/project/varbase_ai_readable_base) (`.gitlab-ci.yml`) runs on every merge
+request and every push to `1.0.x`, like the other Varbase AI recipes: `composer validate` and a lint of every YAML
+file.
 
-1. **Lint**: `composer validate`, every YAML file, and that the repository holds no PHP file.
-2. **Apply on a Varbase 11 site**: built the way Vardot's public recipe CI builds one (`drupal/varbase_project`
-   `11.0.x-dev` with Varbase's curated patches, installed from Varbase Starter, on MariaDB 11.8). It applies the
-   recipe twice and fails if the second apply changes any config, then checks the modules (and that
-   `markdownify_views` is not one of them), the llms.txt content and the permissions with inline `drush` commands.
-3. **Real HTTP**: it adds a page to the main menu, serves the site, shows that `/llms.txt` is a 404 before the
-   `settings.php` line, adds the line, and then **fails unless** `/llms.txt` answers 200 `text/markdown` with both
-   menus, the page's `.md` and `Accept: text/markdown` answer 200 `text/markdown`, the HTML page stays `text/html`,
-   `/nothing.txt` stays a 404 and `/robots.txt` is the file on disk. It also fails on any new error in the log
-   (except mail failures: the runner has no mail server, so those are shown, not failed).
-4. **Functional tests**: the Playwright + Cucumber scenarios in `tests/features`, through
-   [`@vardot/varbase-e2e`](https://www.npmjs.com/package/@vardot/varbase-e2e) in Chromium: the same responses, the
-   llms.txt and Markdownify admin pages as the Webmaster, and that a content editor cannot edit the llms.txt content.
-   Screenshots and reports of a failed run are kept as the `functional-tests` artifact. To run them against a site of
-   your own: `yarn install`, then `LAUNCH_URL=https://your-site.ddev.site yarn test`.
+The functional tests in `tests/features` (Playwright and Cucumber through
+[`@vardot/varbase-e2e`](https://www.npmjs.com/package/@vardot/varbase-e2e)) run against a site of your own:
+`yarn install`, then `LAUNCH_URL=https://your-site.ddev.site yarn test`.
 
 ## Checked
 
@@ -167,9 +154,9 @@ Not yet checked on Educare, Horizon Aid or The Rightup.
 
 | Recipe | What it does |
 |---|---|
-| [Varbase AI Search Base](https://github.com/Vardot/varbase_ai_search_base) | A vector index of the site's content. |
-| [Varbase AI Answers Base](https://github.com/Vardot/varbase_ai_answers_base) | Ask AI: cited answers over that index. |
-| [Varbase AI Content Review Base](https://github.com/Vardot/varbase_ai_content_review_base) | AI review of any content item. |
+| [Varbase AI Search Base](https://www.drupal.org/project/varbase_ai_search_base) | A vector index of the site's content. |
+| [Varbase AI Answers Base](https://www.drupal.org/project/varbase_ai_answers_base) | Ask AI: cited answers over that index. |
+| [Varbase AI Content Review Base](https://www.drupal.org/project/varbase_ai_content_review_base) | AI review of any content item. |
 
 ## License
 
