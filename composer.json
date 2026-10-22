@@ -1,0 +1,36 @@
+{
+    "name": "drupal/varbase_ai_readable_base",
+    "description": "llms.txt and Markdown output for AI tools on Varbase 11: /llms.txt from the site's main and footer menus, and a Markdown version of every node and taxonomy term, on llms_txt and Markdownify. Needs one settings.php line for fast_404. No custom PHP or shell code.",
+    "type": "drupal-recipe",
+    "keywords": [
+        "recipe",
+        "Varbase recipes",
+        "Drupal recipes",
+        "Varbase AI",
+        "llms.txt",
+        "Markdown",
+        "Markdownify",
+        "AI SEO",
+        "GEO"
+    ],
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://github.com/Vardot/varbase_ai_readable_base",
+    "authors": [
+        {
+            "name": "Vardot",
+            "homepage": "https://www.vardot.com",
+            "role": "Maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/Vardot/varbase_ai_readable_base/issues",
+        "source": "https://github.com/Vardot/varbase_ai_readable_base"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "drupal/core": "^11.4",
+        "drupal/llms_txt": "~1.1",
+        "drupal/markdownify": "~1.2"
+    }
+}

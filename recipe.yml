@@ -1,0 +1,59 @@
+name: 'Varbase AI Readable Base'
+description: >-
+  Makes a Varbase 11 site readable by AI tools: serves /llms.txt, built from
+  the site name, slogan, main menu and footer menu, and a Markdown version of
+  every content item and taxonomy term, at <path>.md or with an
+  "Accept: text/markdown" request header. Installs llms_txt and Markdownify
+  (with its path alias and file attachment submodules), both stable and
+  covered by the Drupal security advisory policy. Varbase's fast_404 module
+  blocks /llms.txt until one settings.php line is added, which a recipe cannot
+  do: see the README. Grants the llms.txt and Markdownify admin permissions to
+  the SEO and site admin roles. No custom PHP or shell code.
+type: 'Varbase AI'
+install:
+  - node
+  - taxonomy
+  - path
+  - file
+  - text
+  - llms_txt
+  - markdownify
+  - markdownify_path
+  - markdownify_file_attachment
+  # Not markdownify_views: 1.2.0 answers HTTP 500 for the Markdown of any View
+  # on Drupal 11.4 (https://www.drupal.org/i/3590402). See the README.
+config:
+  # Re-applying must be safe: create what is missing and leave the rest.
+  strict: false
+  actions:
+    llms_txt.settings:
+      simpleConfigUpdate:
+        content: |
+          # [site:name]
+
+          [site:slogan]
+
+          ## Main navigation
+
+          [llms_txt_markdown_menu:main]
+
+          ## Footer
+
+          [llms_txt_markdown_menu:footer]
+    # The content-only display: a Canvas content template makes the full view
+    # mode the whole layout, sidebar and all.
+    markdownify.settings:
+      simpleConfigUpdate:
+        supported_entities.node.view_modes:
+          page: search_index
+          book: search_index
+          announcement: search_index
+    user.role.seo_admin:
+      grantPermissions:
+        - 'administer llms.txt configuration'
+        - 'administer llms.txt sections'
+    user.role.site_admin:
+      grantPermissions:
+        - 'administer llms.txt configuration'
+        - 'administer llms.txt sections'
+        - 'administer markdownify'
