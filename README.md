@@ -1,7 +1,7 @@
 [![Varbase](https://raw.githubusercontent.com/Vardot/varbase/11.0.x/images/varbase-logo.png)](https://www.drupal.org/project/varbase)
 
 # Varbase AI Readable Base
-[![Varbase AI Readable Base](https://img.shields.io/badge/Varbase%20AI%20Readable%20Base-1.0.x--dev-0d6efc?labelColor=001d38&style=flat-square)](https://www.drupal.org/project/varbase_ai_readable_base)
+[![Varbase AI Readable Base](https://img.shields.io/badge/Varbase%20AI%20Readable%20Base-1.0.0--alpha1-0d6efc?labelColor=001d38&style=flat-square)](https://www.drupal.org/project/varbase_ai_readable_base)
 
 A Drupal recipe that makes a Varbase 11 site readable by AI tools. It serves
 [`/llms.txt`](https://llmstxt.org), built from the site name, slogan, main menu and footer menu, and a Markdown
