@@ -5,10 +5,11 @@ Varbase 11 site with this recipe applied.
 
 | Feature | Covers |
 | --- | --- |
-| `01-01-ai-readable-base-llms-txt.feature` | /llms.txt as Markdown with the main and footer menus; other .txt files still get Fast 404 |
-| `01-02-ai-readable-base-markdown.feature` | A blog post as Markdown at .md and for Accept: text/markdown, HTML otherwise, and a term as Markdown |
-| `01-03-ai-readable-base-sections.feature` | An SEO admin adds a section and visitors see it in /llms.txt |
-| `01-04-ai-readable-base-access.feature` | SEO and site admins configure /llms.txt, only site admins Markdownify, editors neither |
+| `01-01-ai-readable-base-llms-txt.feature` | `/llms.txt` is served as Markdown with the main and footer menus; other `.txt` files still get Fast 404 |
+| `01-02-ai-readable-base-markdown.feature` | A page is served as Markdown at its `.md` path or when Markdown is asked for; browsers still get HTML |
+| `01-03-ai-readable-base-sections.feature` | A section the SEO admin adds is published in `/llms.txt` |
+| `01-04-ai-readable-base-access.feature` | Who configures `/llms.txt` |
+| `01-05-ai-readable-base-accessibility.feature` | The llms.txt section form gives every field a label and every link a name |
 
 ## Run it
 
@@ -23,6 +24,5 @@ The site needs the webmaster (`webmaster`) and one user per role, named after th
 
 ## AI provider
 
-The suite needs no AI provider and no key. CI adds the README's `settings.php` line that exempts `/llms.txt`
-from Fast 404; without it `/llms.txt` answers Fast 404's own 404 page. The Markdown scenarios read the Varbase
-demo blog post `/blog/community-behind-varbase-support-and-collaboration` and the first term.
+CI applies Drupal CMS AI before the recipe. It sets up an amazee.ai trial as the default provider, so no key
+is needed. The suite makes no AI calls of its own. CI adds the README settings.php line for Fast 404.
