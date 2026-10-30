@@ -2,7 +2,7 @@
     "name": "drupal/varbase_ai_readable_base",
     "description": "llms.txt and Markdown output for AI tools on Varbase 11: /llms.txt from the site's main and footer menus, and a Markdown version of every node and taxonomy term, on llms_txt and Markdownify. Needs one settings.php line for fast_404. No custom PHP or shell code.",
     "type": "drupal-recipe",
-    "version": "1.0.x-dev",
+    "version": "1.0.0-beta2",
     "keywords": [
         "recipe",
         "Varbase recipes",
