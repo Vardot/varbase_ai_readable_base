@@ -30,8 +30,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "drupal/core": "^11.4",
-        "drupal/llms_txt": "~1.1",
-        "drupal/markdownify": "~1.2"
+        "drupal/core": "^11.4 || ^12.0",
+        "drupal/llms_txt": "^1.1",
+        "drupal/markdownify": "^1.2"
     }
 }
